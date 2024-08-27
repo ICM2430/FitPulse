@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:backgroundTint="#24613e"
-            android:text="< Atrás" />
+            android:text="Atrás" />
 
         <TextView
             android:id="@+id/fecha"

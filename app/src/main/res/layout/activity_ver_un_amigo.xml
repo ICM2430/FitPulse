@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:backgroundTint="#24613e"
-            android:text="< Atrás" />
+            android:text="Atrás" />
 
         <TextView
             android:id="@+id/amigos"
@@ -40,10 +40,6 @@
             android:layout_width="149dp"
             android:layout_height="142dp"
             android:layout_gravity="center"
-            app:civ_border_color="@color/white"
-            app:civ_border_width="2dp"
-            app:civ_circle_background_color="@android:color/white"
-            app:civ_image_scaleType="centerCrop"
             tools:srcCompat="@drawable/perfil" />
 
         <TextView
