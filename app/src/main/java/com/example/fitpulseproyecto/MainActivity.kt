@@ -20,5 +20,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(baseContext, LoginActivity::class.java)
             startActivity(intent)
         }
+
     }
 }
