@@ -39,8 +39,10 @@ android {
 }
 
 dependencies {
-    // https://mvnrepository.com/artifact/com.google.code.gson/gson
+    // https://mvnrepository.com/artifact/com.google.code.gson/gson leer_archivos
     implementation("com.google.code.gson:gson:2.11.0")
+    // ImageView circulares
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

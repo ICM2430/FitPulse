@@ -5,8 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MiPerfilActivity"
-    android:background="#202124">
+    android:background="#202124"
+    tools:context=".VerUnAmigoActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,19 +24,19 @@
             android:text="< Atrás" />
 
         <TextView
-            android:id="@+id/titulo"
+            android:id="@+id/amigos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:fontFamily="timmana"
-            android:text="FitPulse"
-            android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="50dp"
-            tools:fontFamily="@font/timmana" />
+            android:fontFamily="@font/roboto_slab_semibold"
+            android:textSize="30dp"
+            android:text="Nombre_amigo"
+            android:textAlignment="center"
+            android:layout_marginTop="60dp"/>
 
         <ImageView
             android:id="@+id/circleImageView"
+            android:layout_marginTop="30dp"
             android:layout_width="149dp"
             android:layout_height="142dp"
             android:layout_gravity="center"
@@ -70,29 +71,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:text="Nombre"
-            android:fontFamily="@font/roboto_slab_semibold"
-            android:textColor="@color/white"
-            android:textSize="30dp"/>
-
-        <TextView
-            android:id="@+id/nombre"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="20dp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto_slab_semibold"
-            android:background="#24613e"
-            android:text="-"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="40dp"
             android:layout_marginLeft="20dp"
             android:text="Correo"
             android:fontFamily="@font/roboto_slab_semibold"
@@ -114,15 +93,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="40dp"
             android:layout_marginLeft="20dp"
-            android:text="Fecha de nacimiento"
+            android:text="Últimos entrenos"
             android:fontFamily="@font/roboto_slab_semibold"
             android:textColor="@color/white"
             android:textSize="30dp"/>
 
         <TextView
-            android:id="@+id/fecha_nacimiento"
+            android:id="@+id/entreno1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -134,16 +113,7 @@
             android:text="-"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:text="Contraseña"
-            android:fontFamily="@font/roboto_slab_semibold"
-            android:textColor="@color/white"
-            android:textSize="30dp"/>
-
-        <TextView
+            android:id="@+id/entreno2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -152,17 +122,20 @@
             android:textColor="@color/white"
             android:fontFamily="@font/roboto_slab_semibold"
             android:background="#24613e"
-            android:text="*****************************"/>
+            android:text="-"/>
 
-        <Button
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="30dp"
-            android:id="@+id/editar"
+        <TextView
+            android:id="@+id/entreno3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#24613e"
-            android:text="Editar mis datos" />
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto_slab_semibold"
+            android:background="#24613e"
+            android:text="-"/>
 
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,6 +13,15 @@
         android:theme="@style/Theme.FitPulseProyecto"
         tools:targetApi="31">
         <activity
+            android:name=".VerUnAmigoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AgregarAmigosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditarPerfilActivity"
+            android:exported="false" />
+        <activity
             android:name=".CompartirEntrenoActivity"
             android:exported="false" />
         <activity

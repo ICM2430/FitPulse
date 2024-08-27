@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MiPerfilActivity"
+    tools:context=".EditarPerfilActivity"
     android:background="#202124">
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,7 +55,7 @@
             android:textColor="@color/white"
             android:textSize="30dp"/>
 
-        <TextView
+        <EditText
             android:id="@+id/usuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -65,7 +65,9 @@
             android:textColor="@color/white"
             android:fontFamily="@font/roboto_slab_semibold"
             android:background="#24613e"
-            android:text="-"/>
+            android:hint="Ingresa tu nuevo usuario"
+            android:textColorHint="@color/cardview_light_background"
+            android:inputType="text" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -77,7 +79,7 @@
             android:textColor="@color/white"
             android:textSize="30dp"/>
 
-        <TextView
+        <EditText
             android:id="@+id/nombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -87,7 +89,9 @@
             android:textColor="@color/white"
             android:fontFamily="@font/roboto_slab_semibold"
             android:background="#24613e"
-            android:text="-"/>
+            android:hint="Ingresa tu nombre"
+            android:textColorHint="@color/cardview_light_background"
+            android:inputType="text" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -99,7 +103,7 @@
             android:textColor="@color/white"
             android:textSize="30dp"/>
 
-        <TextView
+        <EditText
             android:id="@+id/correo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -109,7 +113,9 @@
             android:textColor="@color/white"
             android:fontFamily="@font/roboto_slab_semibold"
             android:background="#24613e"
-            android:text="-"/>
+            android:hint="Ingresa tu nuevo correo"
+            android:textColorHint="@color/cardview_light_background"
+            android:inputType="textEmailAddress" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -121,7 +127,7 @@
             android:textColor="@color/white"
             android:textSize="30dp"/>
 
-        <TextView
+        <EditText
             android:id="@+id/fecha_nacimiento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -131,7 +137,9 @@
             android:textColor="@color/white"
             android:fontFamily="@font/roboto_slab_semibold"
             android:background="#24613e"
-            android:text="-"/>
+            android:hint="Ingresa tu fecha de nacimiento"
+            android:textColorHint="@color/cardview_light_background"
+            android:inputType="text|date" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -143,7 +151,8 @@
             android:textColor="@color/white"
             android:textSize="30dp"/>
 
-        <TextView
+        <EditText
+            android:id="@+id/contrasena"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -152,17 +161,19 @@
             android:textColor="@color/white"
             android:fontFamily="@font/roboto_slab_semibold"
             android:background="#24613e"
-            android:text="*****************************"/>
+            android:hint="Ingresa tu nueva contraseña"
+            android:textColorHint="@color/cardview_light_background"
+            android:inputType="textPassword" />
 
         <Button
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="30dp"
-            android:id="@+id/editar"
+            android:id="@+id/guardar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#24613e"
-            android:text="Editar mis datos" />
+            android:text="Guardar" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,123 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#202124"
     tools:context=".VerAmigosActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/atras"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:backgroundTint="#24613e"
+            android:text="< Atrás" />
+
+        <TextView
+            android:id="@+id/amigos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto_slab_semibold"
+            android:textSize="30dp"
+            android:text="Mis amigos"
+            android:textAlignment="center"
+            android:layout_marginTop="60dp"/>
+
+        <Button
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/agregar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#24613e"
+            android:text="Agregar más amigos" />
+
+        <LinearLayout
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="155dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                tools:srcCompat="@drawable/perfil" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_slab_semibold"
+                android:text="Pepito Pérez"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="30dp" />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/ver_mas"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#24613e"
+            android:text="Ver más" />
+
+        <LinearLayout
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="155dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                tools:srcCompat="@drawable/perfil" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_slab_semibold"
+                android:text="Jorgito Pérez"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="30dp" />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/ver_mas2"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#24613e"
+            android:text="Ver más" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
