@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#202124"
+    tools:context=".IniciarEntrenoActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/atras"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:backgroundTint="#24613e"
+            android:text="Atrás" />
+
+        <TextView
+            android:id="@+id/fecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto_slab_semibold"
+            android:textSize="30dp"
+            android:text="Inicia tu entrenamiento"
+            android:textAlignment="center"
+            android:layout_marginTop="60dp"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="262dp"
+            android:src="@drawable/gps" />
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto_slab_semibold"
+            android:textSize="20dp"
+            android:text="¿Desde dónde empiezas hoy?"/>
+
+        <EditText
+            android:layout_marginTop="20dp"
+            android:id="@+id/inicio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ingresa tu punto de salida"
+            android:textColorHint="@color/cardview_dark_background"
+            android:inputType="textEmailAddress"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/roboto_slab_semibold"
+            android:layout_marginRight="20dp"/>
+
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto_slab_semibold"
+            android:textSize="20dp"
+            android:text="¿Hasta dónde quieres ir hoy?"/>
+
+        <EditText
+            android:layout_marginTop="20dp"
+            android:id="@+id/destino"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ingresa tu destino"
+            android:textColorHint="@color/cardview_dark_background"
+            android:inputType="textEmailAddress"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/roboto_slab_semibold"
+            android:layout_marginRight="20dp"/>
+
+        <TextView
+            android:id="@+id/text3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto_slab_semibold"
+            android:textSize="20dp"
+            android:text="¿Con qué amigos haces hoy el entreo?"/>
+
+        <EditText
+            android:layout_marginTop="20dp"
+            android:id="@+id/correo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ingresa un amigo"
+            android:textColorHint="@color/cardview_dark_background"
+            android:inputType="textEmailAddress"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/roboto_slab_semibold"
+            android:layout_marginRight="20dp"/>
+
+        <Button
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="30dp"
+            android:id="@+id/empezar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#24613e"
+            android:text="Empezar entrenamiento" />
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
