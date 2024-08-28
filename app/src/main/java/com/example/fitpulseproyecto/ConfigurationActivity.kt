@@ -6,12 +6,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.fitpulseproyecto.databinding.ActivityCompartirEntrenoBinding
+import com.example.fitpulseproyecto.databinding.ActivityConfigurationBinding
 
-class CompartirEntrenoActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityCompartirEntrenoBinding
+class ConfigurationActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityConfigurationBinding
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityCompartirEntrenoBinding.inflate(layoutInflater)
+        binding = ActivityConfigurationBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
@@ -20,5 +20,6 @@ class CompartirEntrenoActivity : AppCompatActivity() {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
+
     }
 }

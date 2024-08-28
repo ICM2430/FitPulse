@@ -22,6 +22,11 @@ class HomeActivity : AppCompatActivity() {
         val dateFormat = SimpleDateFormat("EEEE, d 'de' MMMM yyyy", Locale("es", "CO"))
         val currentDate = dateFormat.format(Date())
 
+        binding.config.setOnClickListener {
+            val intent = Intent(this, ConfigurationActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.fecha.text = currentDate
 
         binding.iniciarActividad.setOnClickListener {
@@ -46,6 +51,7 @@ class HomeActivity : AppCompatActivity() {
         }
         binding.salir.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 }
