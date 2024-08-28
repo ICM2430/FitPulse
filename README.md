@@ -2,7 +2,7 @@
 
 Proyecto realizado para la asignatura de computación móvil de la carrera de ingeniería de sistemas de la Pontificia Universidad Javeriana
 
-![image](https://github.com/user-attachments/assets/ff55e826-b9d9-4dd1-9c44-a398d600d0d6)
+![image](https://github.com/user-attachments/assets/9195932a-7986-4523-83dc-693a7546b9fa)
 
 En las instalaciones de la Facultad de ingeniería de la Pontificia Universidad Javeriana sede Bogotá
 
