@@ -13,7 +13,7 @@
         android:layout_width="462dp"
         android:layout_height="491dp"
         android:layout_marginBottom="339dp"
-        app:srcCompat="@drawable/inicio_foto"
+        android:src="@drawable/inicio_foto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"

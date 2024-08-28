@@ -38,7 +38,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="262dp"
-        app:srcCompat="@drawable/nature_bici" />
+        android:src="@drawable/nature_bici" />
 
     <TextView
         android:id="@+id/text1"

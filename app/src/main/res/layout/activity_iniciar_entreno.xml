@@ -37,7 +37,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="262dp"
-            app:srcCompat="@drawable/gps" />
+            android:src="@drawable/gps" />
 
         <TextView
             android:id="@+id/text1"

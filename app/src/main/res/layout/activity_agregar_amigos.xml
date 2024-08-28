@@ -59,7 +59,7 @@
                 android:layout_width="155dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                tools:srcCompat="@drawable/perfil" />
+                android:src="@drawable/perfil" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -98,7 +98,7 @@
                 android:layout_width="155dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                tools:srcCompat="@drawable/perfil" />
+                android:src="@drawable/perfil" />
 
             <TextView
                 android:layout_width="wrap_content"

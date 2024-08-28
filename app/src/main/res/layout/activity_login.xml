@@ -36,7 +36,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/bici"/>
+            android:src="@drawable/bici"/>
 
         <TextView
             android:layout_width="wrap_content"

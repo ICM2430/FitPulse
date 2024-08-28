@@ -39,7 +39,7 @@
             android:layout_width="149dp"
             android:layout_height="142dp"
             android:layout_gravity="center"
-            tools:srcCompat="@drawable/perfil" />
+            android:src="@drawable/perfil" />
 
         <TextView
             android:layout_width="wrap_content"
