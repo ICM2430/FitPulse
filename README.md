@@ -10,7 +10,7 @@ En las instalaciones de la Facultad de ingeniería de la Pontificia Universidad 
 
 ![image](https://github.com/user-attachments/assets/ec4be302-3fd6-48c6-9325-25cbd0a5ba6e)
 
-Autores: Alejandra Casas, Andrés Cano, Simón Ortega,...
+Autores: Alejandra Casas, Andrés Cano, Simón Ortega, Daniel Terán, Felipe Morales, Andrés Centanaro
 
 Nosotros como grupo nos preguntamos...y si las personas que hacen ejercicio tuvieran su propia red social? Es por esto que creamos una aplicación enfocada a los apasionados por el ciclismo de todo tipo, esta aplicación es para que las personas que viven por este deporte, tengan un lugar donde subir fotos de sus viajes, conocer gente, compartir su entrenamiento, ver el historial de su actividad física, subir sus rutas, entre otras funciones. Fitpulse es una poderosa aplicación de android studio diseñada para todo tipo de personas amantes del
 ciclismo,desde los más intrépidos hasta los más tranquilos. Nuestra aplicación desarrollada por PatitoDev cuenta con una cantidad de sensores los cuales son útilies para recopilar información sobre tu viaje y darte los mejores recuerdos de tus aventuras, además te da la capcidad de tener más control de tus viajes.
