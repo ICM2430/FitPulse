@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#202124"
+    tools:context=".MenuActivity">
+
+    <ImageView
+        android:id="@+id/fondoCicla"
+        android:layout_width="576dp"
+        android:layout_height="435dp"
+        android:layout_marginBottom="356dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ciclaFondo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@mipmap/ic_launcher"
+        android:contentDescription="Volver"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="¿Qué quieres hacer hoy?"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/back_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Botones Centrados -->
+
+    <!-- Fila superior -->
+    <ImageButton
+        android:id="@+id/mi_perfil"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:background="null"
+        android:contentDescription="Perfil"
+        android:scaleType="fitCenter"
+        android:src="@drawable/UserTexto"
+        app:layout_constraintTop_toBottomOf="@id/fondoCicla"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ver_amigos"/>
+
+    <ImageButton
+        android:id="@+id/ver_amigos"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:background="null"
+        android:contentDescription="Amigos"
+        android:scaleType="fitCenter"
+        android:src="@drawable/AmigosTexto"
+        app:layout_constraintTop_toBottomOf="@id/fondoCicla"
+        app:layout_constraintStart_toEndOf="@id/mi_perfil"
+        app:layout_constraintEnd_toStartOf="@id/iniciar_actividad"/>
+
+    <ImageButton
+        android:id="@+id/iniciar_actividad"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:background="null"
+        android:contentDescription="Iniciar"
+        android:scaleType="fitCenter"
+        android:src="@drawable/RutaTexto"
+        app:layout_constraintTop_toBottomOf="@id/fondoCicla"
+        app:layout_constraintStart_toEndOf="@id/ver_amigos"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Fila inferior -->
+    <ImageButton
+        android:id="@+id/config"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:background="null"
+        android:contentDescription="Configuración"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ConfigTexto"
+        app:layout_constraintTop_toBottomOf="@id/mi_perfil"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ver_historial"/>
+
+    <ImageButton
+        android:id="@+id/ver_historial"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:background="null"
+        android:contentDescription="Ver entrenos"
+        android:scaleType="fitCenter"
+        android:src="@drawable/EntrenoTexto"
+        app:layout_constraintTop_toBottomOf="@id/ver_amigos"
+        app:layout_constraintStart_toEndOf="@id/config"
+        app:layout_constraintEnd_toStartOf="@id/salir"/>
+
+    <ImageButton
+        android:id="@+id/salir"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:background="null"
+        android:contentDescription="Cerrar Sesión"
+        android:scaleType="fitCenter"
+        android:src="@drawable/LogOutTexto"
+        app:layout_constraintTop_toBottomOf="@id/iniciar_actividad"
+        app:layout_constraintStart_toEndOf="@id/ver_historial"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
