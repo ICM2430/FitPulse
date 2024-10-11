@@ -19,6 +19,10 @@ dependencyResolutionManagement {
     }
 }
 
+<<<<<<< HEAD
 rootProject.name = "FitPulseProyecto"
+=======
+rootProject.name = "AMIGOS"
+>>>>>>> 8c282d2 (Actividad Amigos y chat)
 include(":app")
  

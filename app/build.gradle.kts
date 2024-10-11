@@ -4,11 +4,19 @@ plugins {
 }
 
 android {
+<<<<<<< HEAD
     namespace = "com.example.fitpulseproyecto"
     compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.fitpulseproyecto"
+=======
+    namespace = "com.example.amigos"
+    compileSdk = 34
+
+    defaultConfig {
+        applicationId = "com.example.amigos"
+>>>>>>> 8c282d2 (Actividad Amigos y chat)
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -17,6 +25,13 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+<<<<<<< HEAD
+=======
+    buildFeatures{
+        viewBinding=true
+    }
+
+>>>>>>> 8c282d2 (Actividad Amigos y chat)
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -26,9 +41,12 @@ android {
             )
         }
     }
+<<<<<<< HEAD
     buildFeatures{
         viewBinding = true
     }
+=======
+>>>>>>> 8c282d2 (Actividad Amigos y chat)
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -39,10 +57,14 @@ android {
 }
 
 dependencies {
+<<<<<<< HEAD
     // https://mvnrepository.com/artifact/com.google.code.gson/gson leer_archivos
     implementation("com.google.code.gson:gson:2.11.0")
     // ImageView circulares
     implementation ("de.hdodenhof:circleimageview:3.1.0")
+=======
+
+>>>>>>> 8c282d2 (Actividad Amigos y chat)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

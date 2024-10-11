@@ -1,3 +1,7 @@
 <resources>
+<<<<<<< HEAD
     <string name="app_name">FitPulseProyecto</string>
+=======
+    <string name="app_name">AMIGOS</string>
+>>>>>>> 8c282d2 (Actividad Amigos y chat)
 </resources>
