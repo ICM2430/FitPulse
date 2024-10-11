@@ -37,4 +37,4 @@ demás.
 Technologies Used
 
 Programming Language: Kotlin
-Platform: Android Studio
+Platform:  Android Studio
