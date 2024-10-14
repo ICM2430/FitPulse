@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "186878658322",
+    "project_id": "autenticacion-fitpulse",
+    "storage_bucket": "autenticacion-fitpulse.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:186878658322:android:f7a16cd6b266a45bcad5cb",
+        "android_client_info": {
+          "package_name": "com.example.autenticacionfirebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBS_aSwai22C2xY-fSetz6KFeQh1h2jIPY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
