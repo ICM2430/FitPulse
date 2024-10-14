@@ -23,7 +23,7 @@ class HomeActivity : AppCompatActivity() {
         val currentDate = dateFormat.format(Date())
 
         binding.config.setOnClickListener {
-            val intent = Intent(this, ConfigurationActivity::class.java)
+            val intent = Intent(this, MenuActivity::class.java)
             startActivity(intent)
         }
 

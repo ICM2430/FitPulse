@@ -48,11 +48,11 @@
         android:layout_marginEnd="135dp"
         android:layout_marginBottom="163dp"
         android:backgroundTint="#24bb64"
-        android:text="INICIA SESIÓN"
+        android:fontFamily="@font/roboto_slab_semibold"
+        android:text="COMIENZA LA AVENTURA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:fontFamily="@font/roboto_slab_semibold"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
