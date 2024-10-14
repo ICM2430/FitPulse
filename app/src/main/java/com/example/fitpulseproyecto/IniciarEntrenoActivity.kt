@@ -20,5 +20,9 @@ class IniciarEntrenoActivity : AppCompatActivity() {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
+        binding.empezar.setOnClickListener{
+            val intent = Intent(this, MapsActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
