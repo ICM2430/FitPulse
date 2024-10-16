@@ -12,24 +12,42 @@
         android:layout_height="match_parent"
         tools:context=".MapsActivity" />
 
-    <TextView
-        android:id="@+id/brujuladireccion"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_gravity="top|left"
         android:layout_marginLeft="30dp"
-        android:padding="16dp"
-        android:text="Hello, World!"
-        android:textColor="#000000" />
+        android:layout_marginTop="16dp">
 
-    <TextView
-        android:id="@+id/temperatura"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|center"
-        android:layout_marginLeft="30dp"
-        android:padding="16dp"
-        android:text="Hello, World!"
-        android:textColor="#000000" />
+        <TextView
+            android:layout_marginLeft="17dp"
+            android:id="@+id/brujuladireccion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="brujula!"
+            android:textColor="#000000"
+            android:background="@color/translucent_blue" />
+
+        <TextView
+            android:id="@+id/temperaturaVal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="33.375 °C"
+            android:textColor="#000000"
+            android:background="@color/translucent_blue" />
+
+        <TextView
+            android:id="@+id/acelerometroZval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="Ac: 0.0"
+            android:textColor="#000000"
+            android:background="@color/translucent_blue" />
+
+    </LinearLayout>
 
 </FrameLayout>
