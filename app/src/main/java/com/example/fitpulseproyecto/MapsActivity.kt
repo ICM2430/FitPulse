@@ -71,8 +71,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     //Sensor
     private lateinit var sensorManager: SensorManager
+    private  var  magnetometer: Sensor? = null
     private var lightSensor : Sensor? = null
+    private var temperatureSensor : Sensor? = null
     private lateinit var sensorEventListener: SensorEventListener
+
+    
+
 
     //Permission
     private val locationPermissionRequest = registerForActivityResult(
@@ -97,6 +102,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
         lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
         sensorEventListener = createSensorEventListener()
+        magnetometer = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
+
+
 
         geocoder = Geocoder(baseContext)
         val destinoAddress = intent.getStringExtra("destino")
@@ -115,7 +123,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onResume() {
         super.onResume()
         sensorManager.registerListener(sensorEventListener, lightSensor, SensorManager.SENSOR_DELAY_NORMAL)
+        sensorManager.registerListener(sensorEventListener, magnetometer, SensorManager.SENSOR_DELAY_NORMAL)
     }
+
+
 
 
     override fun onPause() {
@@ -286,5 +297,22 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+
+    fun onSensorChanged(sensorEvent: SensorEvent){
+
+        var x = sensorEvent.values[0]
+        var y = sensorEvent.values[1]
+        var z = sensorEvent.values[2]
+
+        var direction = Math.toDegrees(Math.atan2(y.toDouble(), x.toDouble()))
+
+        if(direction<0){
+            direction +=360
+        }
+            Log.i ("tag algo",direction.toString())
+        binding.brujuladireccion.text = "hiii "
+    }
+
+
 
 }
