@@ -40,29 +40,6 @@
             android:src="@drawable/gps" />
 
         <TextView
-            android:id="@+id/text1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto_slab_semibold"
-            android:textSize="20dp"
-            android:text="¿Desde dónde empiezas hoy?"/>
-
-        <EditText
-            android:layout_marginTop="20dp"
-            android:id="@+id/inicio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Ingresa tu punto de salida"
-            android:textColorHint="@color/cardview_dark_background"
-            android:inputType="textEmailAddress"
-            android:layout_marginLeft="20dp"
-            android:fontFamily="@font/roboto_slab_semibold"
-            android:layout_marginRight="20dp"/>
-
-        <TextView
             android:id="@+id/text2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,9 +57,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ingresa tu destino"
+            android:textColor="#BDBDBD"
             android:textColorHint="@color/cardview_dark_background"
             android:inputType="textEmailAddress"
             android:layout_marginLeft="20dp"
+            android:background="@drawable/borders"
+            android:padding="10dp"
             android:fontFamily="@font/roboto_slab_semibold"
             android:layout_marginRight="20dp"/>
 
@@ -104,9 +84,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ingresa un amigo"
+            android:textColor="#BDBDBD"
             android:textColorHint="@color/cardview_dark_background"
             android:inputType="textEmailAddress"
             android:layout_marginLeft="20dp"
+            android:background="@drawable/borders"
+            android:padding="10dp"
             android:fontFamily="@font/roboto_slab_semibold"
             android:layout_marginRight="20dp"/>
 

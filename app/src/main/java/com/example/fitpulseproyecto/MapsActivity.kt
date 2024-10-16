@@ -1,0 +1,318 @@
+package com.example.fitpulseproyecto
+
+import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.drawable.Drawable
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
+import android.location.Geocoder
+import android.location.Location
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.os.Looper
+import android.os.StrictMode
+import android.util.Log
+import android.widget.Toast
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import com.example.fitpulseproyecto.databinding.ActivityMapsBinding
+import com.example.taller_2_daniel_teran.model.RouteResponse
+import com.example.taller_2_daniel_teran.service.OpenRouteService
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.Priority
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.MapStyleOptions
+import com.google.android.gms.maps.model.PolylineOptions
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.json.JSONObject
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+
+    private lateinit var mMap: GoogleMap
+    private lateinit var binding: ActivityMapsBinding
+
+    //Constants
+    val RADIUS_OF_EARTH_KM = 6371
+
+    //Location
+    private lateinit var locationClient : FusedLocationProviderClient
+    private lateinit var locationRequest : LocationRequest
+    private lateinit var locationCallback: LocationCallback
+    private lateinit var lastLocationObtained : LatLng
+    private var cantUpdates = 0
+
+    //Routes
+    private lateinit var geocoder: Geocoder
+    private var destino : LatLng? = null
+    private var inicio = LatLng(0.0,0.0)
+
+    //Sensor
+    private lateinit var sensorManager: SensorManager
+    private  var  magnetometer: Sensor? = null
+    private var lightSensor : Sensor? = null
+    private var temperatureSensor : Sensor? = null
+    private lateinit var sensorEventListener: SensorEventListener
+
+    
+
+
+    //Permission
+    private val locationPermissionRequest = registerForActivityResult(
+        ActivityResultContracts.RequestPermission(),
+        ActivityResultCallback {
+            startLocationUpdates()
+        }
+    )
+
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+
+        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
+
+        super.onCreate(savedInstanceState)
+
+        binding = ActivityMapsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+        lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
+        sensorEventListener = createSensorEventListener()
+        magnetometer = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
+
+
+
+        geocoder = Geocoder(baseContext)
+        val destinoAddress = intent.getStringExtra("destino")
+        destino = destinoAddress?.let { findLocation(it) }
+
+        val mapFragment = supportFragmentManager
+            .findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+
+        locationClient = LocationServices.getFusedLocationProviderClient(this)
+        locationRequest = createLocationRequest()
+        locationCallback = createLocationCallback()
+        locationPermissionRequest.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        sensorManager.registerListener(sensorEventListener, lightSensor, SensorManager.SENSOR_DELAY_NORMAL)
+        sensorManager.registerListener(sensorEventListener, magnetometer, SensorManager.SENSOR_DELAY_NORMAL)
+    }
+
+
+
+
+    override fun onPause() {
+        super.onPause()
+        sensorManager.unregisterListener(sensorEventListener)
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        val javeriana = LatLng(4.628626515364146, -74.06468596237461)
+        lastLocationObtained = javeriana
+        mMap = googleMap
+        mMap.uiSettings.isZoomControlsEnabled = true
+        mMap.uiSettings.setAllGesturesEnabled(true)
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(javeriana))
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(10f))
+
+    }
+
+    private fun createLocationRequest() : LocationRequest{
+        val request = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 3000)
+            .setWaitForAccurateLocation(true)
+            .setMinUpdateIntervalMillis(1000).build()
+        return request
+    }
+
+    private fun createLocationCallback() : LocationCallback{
+        val callback = object : LocationCallback(){
+            override fun onLocationResult(result: LocationResult) {
+                super.onLocationResult(result)
+                val location = result.lastLocation
+                if(location != null){
+                    updateLocation(location)
+                    val locationAux = LatLng(location.latitude, location.longitude)
+                    drawMarker(locationAux, "yo")
+                }
+            }
+        }
+        return callback
+    }
+
+    private fun startLocationUpdates(){
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            locationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
+        }
+    }
+
+
+
+    private fun updateLocation (location: Location){
+        val ubi = LatLng(location.latitude, location.longitude)
+        if (inicio.latitude == 0.0 && inicio.longitude == 0.0){
+            inicio = ubi
+        }
+        Log.i("ubicacion", "latitud ${location.latitude}, longitud ${location.longitude}")
+        if(distance(lastLocationObtained.latitude, lastLocationObtained.longitude, ubi.latitude, ubi.longitude) > 0.005){
+            Log.i("Distancia", "LA DISTANCIA ES MAYOR A 5m")
+            mMap.clear()
+            drawMarker(ubi, "Yo")
+            destino?.let { createRoute(inicio, it) }
+        }else{
+            Log.i("Distancia", "LA DISTANCIA ES MENOOOOOOR")
+        }
+        lastLocationObtained = ubi
+    }
+
+
+    private fun createSensorEventListener(): SensorEventListener {
+        val listener : SensorEventListener = object : SensorEventListener{
+            override fun onSensorChanged(event: SensorEvent?) {
+                if (this@MapsActivity::mMap.isInitialized){
+                    if(lightSensor != null){
+                        if(event != null) {
+                            if(event.values[0] < 5000){
+                                //dark
+                                mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(baseContext, R.raw.dark))
+                            }else{
+                                //light
+                                mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(baseContext, R.raw.light))
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+
+            }
+
+        }
+        return listener
+    }
+
+
+
+
+    fun drawMarker(location: LatLng, description: String?) {
+        val addressMarker = mMap.addMarker(
+            MarkerOptions().position(location).icon(bitmapDescriptorFromVector(this, R.drawable.ic_bike))
+        )!!
+        if (description != null) {
+            addressMarker.title = description
+        }
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 18f)) // Ajusta el zoom aquí
+    }
+
+    fun bitmapDescriptorFromVector(context: Context, vectorResId: Int): BitmapDescriptor {
+        val vectorDrawable: Drawable = ContextCompat.getDrawable(context, vectorResId)!!
+        vectorDrawable.setBounds(0, 0, vectorDrawable.intrinsicWidth, vectorDrawable.intrinsicHeight)
+        val bitmap = Bitmap.createBitmap(vectorDrawable.intrinsicWidth, vectorDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        vectorDrawable.draw(canvas)
+        return BitmapDescriptorFactory.fromBitmap(bitmap)
+    }
+
+    fun distance(lat1 : Double, long1: Double, lat2:Double, long2:Double) : Double{
+        val latDistance = Math.toRadians(lat1 - lat2)
+        val lngDistance = Math.toRadians(long1 - long2)
+        val a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)+
+                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
+                Math.sin(lngDistance / 2) * Math.sin(lngDistance / 2)
+        val c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        val result = RADIUS_OF_EARTH_KM * c;
+        return Math.round(result*100.0)/100.0;
+    }
+    fun findLocation(address : String):LatLng?{
+        val addresses = geocoder.getFromLocationName(address, 2)
+        if(addresses != null && !addresses.isEmpty()){
+            val addr = addresses.get(0)
+            val location = LatLng(addr.latitude, addr.longitude)
+            return location
+        }
+        return null
+    }
+
+    fun createRoute(start : LatLng, end : LatLng){
+        Log.i("ruta", "(CREAR_RUTA)INICIO = ${start.latitude},${start.longitude}; FIN = ${end.latitude},${end.longitude}")
+        CoroutineScope(Dispatchers.IO).launch{
+            val call = getRetrofit().create(OpenRouteService::class.java).getRoute(
+                "5b3ce3597851110001cf624878ccea7dcf3c4f4c8cbe61281706a078",
+                "${start.longitude},${start.latitude}",
+                "${end.longitude},${end.latitude}"
+            )
+            if (call.isSuccessful){
+                Log.i("callApi", "OK ${call.raw().toString()}")
+                Log.i("callApi", "OK ${call.body()?.features?.first()?.geometry?.coordinates}")
+                drawRoute(call.body())
+            }else{
+                Log.i("callApi", "NOT OK")
+            }
+        }
+    }
+
+    private fun drawRoute(routeResponse: RouteResponse?) {
+        val polylineOptions = PolylineOptions()
+        routeResponse?.features?.first()?.geometry?.coordinates?.forEach {
+            Log.i("callApi", "${it[1]}, ${it[0]}")
+            polylineOptions.add(LatLng(it[1], it[0]))
+        }
+        runOnUiThread {
+            val poly = mMap.addPolyline(polylineOptions.color(Color.CYAN))
+        }
+    }
+
+    fun getRetrofit() : Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("https://api.openrouteservice.org/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    fun onSensorChanged(sensorEvent: SensorEvent){
+
+        var x = sensorEvent.values[0]
+        var y = sensorEvent.values[1]
+        var z = sensorEvent.values[2]
+
+        var direction = Math.toDegrees(Math.atan2(y.toDouble(), x.toDouble()))
+
+        if(direction<0){
+            direction +=360
+        }
+            Log.i ("tag algo",direction.toString())
+        binding.brujuladireccion.text = "hiii "
+    }
+
+
+
+}
