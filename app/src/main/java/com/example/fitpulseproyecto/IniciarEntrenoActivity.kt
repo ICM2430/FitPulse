@@ -13,11 +13,15 @@ class IniciarEntrenoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityIniciarEntrenoBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(binding.root)
 
         binding.atras.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
+            val intent = Intent(this, MenuActivity::class.java)
+            startActivity(intent)
+        }
+        binding.empezar.setOnClickListener{
+            val intent = Intent(this, MapsActivity::class.java)
+            intent.putExtra("destino", binding.destino.text.toString())
             startActivity(intent)
         }
     }

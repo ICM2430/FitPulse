@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#202124">
+
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:contentDescription="Volver"
+        android:src="@drawable/baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/titulo_entrenamiento" />
+
+    <ImageView
+        android:id="@+id/imagen_entrenamiento"
+        app:layout_constraintTop_toTopOf="@id/titulo_entrenamiento"
+        android:layout_marginTop="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/imagen_ver_entrenos_2"
+        android:scaleType="centerCrop"/>
+
+    <!-- Título (TextView) alineado a la derecha del ImageButton -->
+    <TextView
+        android:id="@+id/titulo_entrenamiento"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/roboto_slab_semibold"
+        android:textSize="20sp"
+        android:text="Título del entreno"
+        android:textAlignment="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/backButton"
+        app:layout_constraintBottom_toBottomOf="@id/backButton" />
+
+    <!-- Fecha del entrenamiento -->
+    <TextView
+        android:id="@+id/fecha_entrenamiento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="16dp"
+        android:text="Fecha del Entrenamiento"
+        app:layout_constraintTop_toBottomOf="@id/imagen_entrenamiento"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Descripción del entrenamiento -->
+    <TextView
+        android:id="@+id/descripcion_entrenamiento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="8dp"
+        android:text="Descripción del Entrenamiento"
+        app:layout_constraintTop_toBottomOf="@id/fecha_entrenamiento"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Cuadro "Saliste desde" -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="#3ca74f"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/descripcion_entrenamiento"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/saliste_desde"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Saliste desde:"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/lugar_salida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bogotá"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- Cuadro "Llegaste a" -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="#3ca74f"
+        android:layout_marginTop="100dp"
+        app:layout_constraintTop_toBottomOf="@id/descripcion_entrenamiento"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/llegaste_a"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Llegaste a:"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/lugar_llegada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sopó"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
