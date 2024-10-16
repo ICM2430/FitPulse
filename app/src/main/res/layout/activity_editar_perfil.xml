@@ -7,20 +7,23 @@
     android:layout_height="match_parent"
     tools:context=".EditarPerfilActivity"
     android:background="#202124">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="192dp">
 
         <Button
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
             android:id="@+id/atras"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
             android:backgroundTint="#24613e"
-            android:text="Atrás" />
+            android:text="Atrás"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/titulo"
@@ -41,135 +44,148 @@
             android:layout_gravity="center"
             android:src="@drawable/perfil" />
 
+        <Button
+            android:id="@+id/btCambiarImagenGaleria"
+            android:layout_width="165dp"
+            android:layout_height="81dp"
+            android:text="Cambiar imagen con galeria" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
             android:layout_marginLeft="20dp"
-            android:text="Usuario"
+            android:layout_marginTop="40dp"
             android:fontFamily="@font/roboto_slab_semibold"
+            android:text="Usuario"
             android:textColor="@color/white"
-            android:textSize="30dp"/>
+            android:textSize="30dp" />
 
         <EditText
             android:id="@+id/usuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:layout_marginLeft="40dp"
+            android:layout_marginTop="15dp"
             android:layout_marginRight="20dp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto_slab_semibold"
             android:background="#24613e"
+            android:fontFamily="@font/roboto_slab_semibold"
             android:hint="Ingresa tu nuevo usuario"
-            android:textColorHint="@color/cardview_light_background"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColor="@color/white"
+            android:textColorHint="@color/cardview_light_background" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
-            android:text="Nombre"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/roboto_slab_semibold"
+            android:text="Nombre"
             android:textColor="@color/white"
-            android:textSize="30dp"/>
+            android:textSize="30dp" />
 
         <EditText
             android:id="@+id/nombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:layout_marginStart="40dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto_slab_semibold"
             android:background="#24613e"
+            android:fontFamily="@font/roboto_slab_semibold"
             android:hint="Ingresa tu nombre"
-            android:textColorHint="@color/cardview_light_background"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColor="@color/white"
+            android:textColorHint="@color/cardview_light_background" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
-            android:text="Correo"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/roboto_slab_semibold"
+            android:text="Correo"
             android:textColor="@color/white"
-            android:textSize="30dp"/>
+            android:textSize="30dp" />
 
         <EditText
             android:id="@+id/correo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:layout_marginLeft="40dp"
+            android:layout_marginTop="15dp"
             android:layout_marginRight="20dp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto_slab_semibold"
             android:background="#24613e"
+            android:fontFamily="@font/roboto_slab_semibold"
             android:hint="Ingresa tu nuevo correo"
-            android:textColorHint="@color/cardview_light_background"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textColor="@color/white"
+            android:textColorHint="@color/cardview_light_background" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
-            android:text="Fecha de nacimiento"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/roboto_slab_semibold"
+            android:text="Fecha de nacimiento"
             android:textColor="@color/white"
-            android:textSize="30dp"/>
+            android:textSize="30dp" />
 
         <EditText
             android:id="@+id/fecha_nacimiento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:layout_marginLeft="40dp"
+            android:layout_marginTop="15dp"
             android:layout_marginRight="20dp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto_slab_semibold"
             android:background="#24613e"
+            android:fontFamily="@font/roboto_slab_semibold"
             android:hint="Ingresa tu fecha de nacimiento"
-            android:textColorHint="@color/cardview_light_background"
-            android:inputType="text|date" />
+            android:inputType="text|date"
+            android:textColor="@color/white"
+            android:textColorHint="@color/cardview_light_background" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
-            android:text="Contraseña"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/roboto_slab_semibold"
+            android:text="Contraseña"
             android:textColor="@color/white"
-            android:textSize="30dp"/>
+            android:textSize="30dp" />
 
         <EditText
             android:id="@+id/contrasena"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:layout_marginLeft="40dp"
+            android:layout_marginTop="15dp"
             android:layout_marginRight="20dp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto_slab_semibold"
             android:background="#24613e"
+            android:fontFamily="@font/roboto_slab_semibold"
             android:hint="Ingresa tu nueva contraseña"
-            android:textColorHint="@color/cardview_light_background"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColor="@color/white"
+            android:textColorHint="@color/cardview_light_background" />
 
         <Button
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="30dp"
             android:id="@+id/guardar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="20dp"
             android:backgroundTint="#24613e"
             android:text="Guardar" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

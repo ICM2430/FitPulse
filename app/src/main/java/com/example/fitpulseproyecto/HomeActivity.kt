@@ -19,7 +19,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //val currentDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
-        val dateFormat = SimpleDateFormat("EEEE, d 'de' MMMM yyyy", Locale("es", "CO"))
+        val dateFormat = SimpleDateFormat("EEEE, d 'de' MMMM , yyyy", Locale("es", "CO"))
         val currentDate = dateFormat.format(Date())
 
         binding.config.setOnClickListener {
