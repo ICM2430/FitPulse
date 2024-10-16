@@ -17,7 +17,7 @@ class AgregarAmigosActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.atras.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
+            val intent = Intent(this, VerAmigosActivity::class.java)
             startActivity(intent)
         }
     }

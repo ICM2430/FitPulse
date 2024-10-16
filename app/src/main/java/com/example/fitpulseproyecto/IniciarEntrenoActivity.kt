@@ -16,7 +16,7 @@ class IniciarEntrenoActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.atras.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
+            val intent = Intent(this, MenuActivity::class.java)
             startActivity(intent)
         }
         binding.empezar.setOnClickListener{

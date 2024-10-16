@@ -7,71 +7,119 @@
     android:layout_height="match_parent"
     android:background="#202124"
     tools:context=".VerHistorialActivity">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <Button
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:id="@+id/atras"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:backgroundTint="#24613e"
-        android:text="Atrás" />
 
+    <!-- Cabecera con el título -->
+    <!-- Botón de volver (ImageButton) -->
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="70dp"
+        android:background="@null"
+        android:contentDescription="Volver"
+        android:src="@drawable/baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/titulo_historial" />
+
+    <!-- Título (TextView) alineado a la derecha del ImageButton -->
     <TextView
         android:id="@+id/titulo_historial"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginTop="70dp"
         android:textColor="@color/white"
         android:fontFamily="@font/roboto_slab_semibold"
-        android:textSize="30dp"
-        android:text="Historial de entrenamientos"
+        android:textSize="20sp"
+        android:text="Mis entrenamientos anteriores"
         android:textAlignment="center"
-        android:layout_marginTop="60dp"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/backButton"
+        app:layout_constraintBottom_toBottomOf="@id/backButton" />
 
-    <Button
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="30dp"
-        android:id="@+id/historial_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#24613e"
-        android:text="Martes, 27 de agosto" />
 
-    <Button
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="30dp"
-        android:id="@+id/historial_2"
+    <!-- ScrollView para contener los elementos de historial de entrenamientos -->
+    <ScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#24613e"
-        android:text="Martes, 20 de agosto" />
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <Button
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="30dp"
-        android:id="@+id/historial_3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#24613e"
-        android:text="Miércoles, 14 de agosto" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <Button
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="30dp"
-        android:id="@+id/ver_mas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#24bb64"
-        android:text="Ver más" />
-</LinearLayout>
+            <!-- Ejemplo de una entrada de entrenamiento con imagen -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/imagen_ver_entrenos_2"
+                    android:scaleType="centerCrop"/>
+
+                <Button
+                    android:id="@+id/titulo_entrenamiento_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:backgroundTint="#3ca74f"
+                    android:text="Domingo Solitario hasta Sopó"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/fecha_entrenamiento_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="15 de septiembre 2024 - 09:00 AM"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/imagen_ver_entrenos_1"
+                    android:scaleType="centerCrop"/>
+
+                <Button
+                    android:id="@+id/titulo_entrenamiento_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:backgroundTint="#3ca74f"
+                    android:text="Sábado con amigos por patios"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/fecha_entrenamiento_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="14 de septiembre 2024 - 10:00 AM"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
+                    android:gravity="center"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

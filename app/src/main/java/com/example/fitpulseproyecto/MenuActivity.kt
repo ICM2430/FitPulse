@@ -24,6 +24,31 @@ class MenuActivity : AppCompatActivity() {
 
     private fun setupButtons() {
 
+        binding.iniciarActividad.setOnClickListener {
+            startActivity(Intent(baseContext, IniciarEntrenoActivity::class.java))
+        }
+
+        binding.miPerfil.setOnClickListener {
+            startActivity(Intent(baseContext, MiPerfilActivity::class.java))
+        }
+
+        binding.verAmigos.setOnClickListener {
+            startActivity(Intent(baseContext, VerAmigosActivity::class.java))
+        }
+
+        binding.config.setOnClickListener {
+            startActivity(Intent(baseContext, ConfigurationActivity::class.java))
+        }
+
+        binding.verHistorial.setOnClickListener {
+            startActivity(Intent(baseContext, VerHistorialActivity::class.java))
+        }
+
+        binding.backButton.setOnClickListener {
+            startActivity(Intent(baseContext, HomeActivity::class.java))
+        }
+
+
         binding.salir.setOnClickListener {
             FirebaseAuth.getInstance().signOut() // Cerrar sesión en Firebase
             Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show()
