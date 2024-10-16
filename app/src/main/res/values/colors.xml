@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="fitpulsegreen">#24bb64</color>
     <color name="translucent_blue">#6603A9F4</color>
+    <color name="red">#FF0000</color>
 </resources>

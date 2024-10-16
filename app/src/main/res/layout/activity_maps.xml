@@ -37,7 +37,7 @@
             android:padding="16dp"
             android:text="33.375 °C"
             android:textColor="#000000"
-            android:background="@color/translucent_blue" />
+            android:background="@color/fitpulsegreen" />
 
         <TextView
             android:id="@+id/acelerometroZval"

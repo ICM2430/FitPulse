@@ -18,8 +18,10 @@
     import android.os.Looper
     import android.os.StrictMode
     import android.util.Log
+    import android.widget.Toast
     import androidx.activity.result.ActivityResultCallback
     import androidx.activity.result.contract.ActivityResultContracts
+    import androidx.annotation.ColorRes
     import androidx.core.app.ActivityCompat
     import androidx.core.content.ContextCompat
     import com.google.android.gms.location.FusedLocationProviderClient
@@ -32,6 +34,7 @@
     import com.google.android.gms.maps.model.LatLng
     import com.google.android.gms.maps.model.MarkerOptions
     import com.example.fitpulseproyecto.databinding.ActivityMapsBinding
+    import com.example.taller_2_daniel_teran.model.MyLocation
     import com.example.taller_2_daniel_teran.model.RouteResponse
     import com.example.taller_2_daniel_teran.service.OpenRouteService
     import com.google.android.gms.location.LocationCallback
@@ -44,8 +47,13 @@
     import kotlinx.coroutines.CoroutineScope
     import kotlinx.coroutines.Dispatchers
     import kotlinx.coroutines.launch
+    import org.json.JSONObject
     import retrofit2.Retrofit
     import retrofit2.converter.gson.GsonConverterFactory
+    import java.io.BufferedWriter
+    import java.io.File
+    import java.io.FileWriter
+    import java.util.Date
 
     class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -58,7 +66,7 @@
         private lateinit var locationRequest: LocationRequest
         private lateinit var locationCallback: LocationCallback
         private lateinit var lastLocationObtained: LatLng
-        private var cantUpdates = 0
+        private val locations : MutableList<JSONObject> = mutableListOf()
 
         private lateinit var geocoder: Geocoder
         private var destino: LatLng? = null
@@ -212,6 +220,17 @@
                             val temperature = event.values[0]
                             Log.i("Temperatura", "$temperature °C")
                             binding.temperaturaVal.text = "$temperature °C"
+                            if(temperature >= 40){
+                                Log.i("Temperatura", "CALIENTE")
+                                binding.temperaturaVal.setBackgroundResource(R.color.red)
+                                Toast.makeText(baseContext, "Hace mucho calor, es momento de hidratarse", Toast.LENGTH_LONG).show()
+                            }else if(temperature < 0){
+                                Log.i("Temperatura", "FRIO")
+                                binding.temperaturaVal.setBackgroundResource(R.color.translucent_blue)
+                            }else{
+                                Log.i("Temperatura", "NORMAL")
+                                binding.temperaturaVal.setBackgroundResource(R.color.fitpulsegreen)
+                            }
                         }
 
 
@@ -219,6 +238,10 @@
                             val zAcc = event.values[2]
                             Log.i("Acelerómetro", "Aceleracion: $zAcc")
                             binding.acelerometroZval.text = "Ac: $zAcc"
+                            if(zAcc < -20 || zAcc > 20){
+                                Log.i("peligro", "El ciclista se cayo")
+                                writeJSONObject(lastLocationObtained)
+                            }
                         }
 
                     }
@@ -236,6 +259,15 @@
                 addressMarker.title = description
             }
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 18f))
+        }
+        fun writeJSONObject(currentLocation : LatLng) {
+            val myLocation = MyLocation(Date(System.currentTimeMillis()), currentLocation.latitude, currentLocation.longitude)
+            locations.add(myLocation.toJSON())
+            val filename = "locations.json"
+            val file = File(baseContext.getExternalFilesDir(null), filename)
+            val output = BufferedWriter(FileWriter(file))
+            output.write(locations.toString())
+            output.close()
         }
 
         fun bitmapDescriptorFromVector(context: Context, vectorResId: Int): BitmapDescriptor {
