@@ -40,8 +40,13 @@ class HomeActivity : AppCompatActivity() {
         postAdapter = PostAdapter(postList) {}
         binding.postRecyclerView.adapter = postAdapter
 
-        binding.config.setOnClickListener {
+        binding.menu.setOnClickListener {
             val intent = Intent(this, MenuActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.config.setOnClickListener {
+            val intent = Intent(this, ConfigurationActivity::class.java)
             startActivity(intent)
         }
 

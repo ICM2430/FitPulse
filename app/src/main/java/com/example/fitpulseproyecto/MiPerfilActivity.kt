@@ -22,7 +22,7 @@ class MiPerfilActivity : AppCompatActivity() {
         }
 
         binding.atras.setOnClickListener{
-            val intent = Intent(this, HomeActivity::class.java)
+            val intent = Intent(this, MenuActivity::class.java)
             startActivity(intent)
         }
     }
