@@ -46,15 +46,25 @@
 
         <Button
             android:id="@+id/btCambiarImagenGaleria"
-            android:layout_width="165dp"
-            android:layout_height="81dp"
-            android:text="Cambiar imagen con galeria" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cambiar imagen (Galería)"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp" />
+
+        <Button
+            android:id="@+id/btCambiarImagenCamara"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cambiar imagen (Cámara)"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/roboto_slab_semibold"
             android:text="Usuario"
             android:textColor="@color/white"

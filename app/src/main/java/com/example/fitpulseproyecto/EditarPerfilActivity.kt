@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -15,6 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.example.fitpulseproyecto.databinding.ActivityEditarPerfilBinding
 import java.io.File
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -110,9 +112,11 @@ class EditarPerfilActivity : AppCompatActivity() {
     private lateinit var currentPhotoPath: String
     private lateinit var uriCamera: Uri
 
+    private var isCameraRequest = false  // Bandera para distinguir entre cámara y galería
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityEditarPerfilBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
+        binding = ActivityEditarPerfilBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // Listener para botón de atrás
@@ -125,88 +129,88 @@ class EditarPerfilActivity : AppCompatActivity() {
         initActivityResultLaunchers()
 
         // Configurar el botón para cambiar imagen usando la galería
-        binding.btCambiarImagenGaleria.setOnClickListener { checkPermissionAndOpenGallery() }
+        binding.btCambiarImagenGaleria.setOnClickListener {
+            isCameraRequest = false  // Indica que es una solicitud de galería
+            checkPermissionAndOpenGallery()
+        }
 
         // Configurar el botón para cambiar imagen usando la cámara
-        binding.btCambiarImagenGaleria.setOnClickListener { checkPermissionAndOpenCamera() }
+        binding.btCambiarImagenCamara.setOnClickListener {
+            isCameraRequest = true  // Indica que es una solicitud de cámara
+            checkPermissionAndOpenCamera()
+        }
     }
 
     private fun checkPermissionAndOpenCamera() {
-        when {
-            ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED -> {
-                openCamera()
-            }
-            else -> {
-                requestPermission.launch(Manifest.permission.CAMERA)
-            }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            openCamera()
+        } else {
+            requestPermission.launch(Manifest.permission.CAMERA)
         }
     }
 
     private fun openCamera() {
-        val photoFile: File = createImageFile()
-        uriCamera = FileProvider.getUriForFile(this, "${packageName}.fileprovider", photoFile)
-        getContentCamera.launch(uriCamera)
+        try {
+            val photoFile: File = createImageFile()
+            uriCamera = FileProvider.getUriForFile(this, "${packageName}.fileprovider", photoFile)
+            getContentCamera.launch(uriCamera)
+        } catch (ex: IOException) {
+            ex.printStackTrace()
+            Toast.makeText(this, "Error al crear el archivo de imagen", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun createImageFile(): File {
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
-        val storageDir: File? = getExternalFilesDir(null)
+        val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile("JPEG_${timeStamp}_", ".jpg", storageDir).apply {
             currentPhotoPath = absolutePath
         }
     }
 
     private fun checkPermissionAndOpenGallery() {
-        when {
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> {
-                // Para Android 13+ (API 33)
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED) {
-                    openGallery()
-                } else {
-                    requestPermission.launch(Manifest.permission.READ_MEDIA_IMAGES)
-                }
-            }
-            else -> {
-                // Para versiones anteriores a Android 13
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                    openGallery()
-                } else {
-                    requestPermission.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-                }
-            }
+        val permission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            Manifest.permission.READ_MEDIA_IMAGES
+        } else {
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        }
+
+        if (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED) {
+            openGallery()
+        } else {
+            requestPermission.launch(permission)
         }
     }
 
     private fun openGallery() {
-        // Llama al launcher para abrir la galería y seleccionar una imagen
         getContentGallery.launch("image/*")
     }
 
     private fun initActivityResultLaunchers() {
-        // Contrato para abrir la galería y seleccionar una imagen
         getContentGallery = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             uri?.let {
-                // Si se selecciona una imagen, mostrarla en el ImageView
                 binding.circleImageView.setImageURI(uri)
             }
         }
 
-        // Contrato para pedir permisos
         requestPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
-                openGallery() // Aquí puedes abrir la galería si el permiso es concedido
+                if (isCameraRequest) {
+                    openCamera()
+                } else {
+                    openGallery()
+                }
             } else {
                 Toast.makeText(this, "Permiso denegado", Toast.LENGTH_SHORT).show()
             }
         }
 
-        // Contrato para abrir la cámara
         getContentCamera = registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
             if (success) {
                 binding.circleImageView.setImageURI(uriCamera)
+            } else {
+                Toast.makeText(this, "No se pudo tomar la foto", Toast.LENGTH_SHORT).show()
             }
         }
     }
 }
-
-
