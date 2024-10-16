@@ -24,6 +24,10 @@ class MenuActivity : AppCompatActivity() {
 
     private fun setupButtons() {
 
+        binding.iniciarActividad.setOnClickListener {
+            startActivity(Intent(baseContext, IniciarEntrenoActivity::class.java))
+        }
+
         binding.salir.setOnClickListener {
             FirebaseAuth.getInstance().signOut() // Cerrar sesión en Firebase
             Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show()
