@@ -81,6 +81,12 @@
             android:name=".VerAmigosActivity"
             android:exported="false" />
         <activity
+            android:name=".AmigosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".VerHistorialActivity"
             android:exported="false" />
         <activity

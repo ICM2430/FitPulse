@@ -33,7 +33,7 @@ class MenuActivity : AppCompatActivity() {
         }
 
         binding.verAmigos.setOnClickListener {
-            startActivity(Intent(baseContext, VerAmigosActivity::class.java))
+            startActivity(Intent(baseContext, AmigosActivity::class.java))
         }
 
         binding.config.setOnClickListener {
