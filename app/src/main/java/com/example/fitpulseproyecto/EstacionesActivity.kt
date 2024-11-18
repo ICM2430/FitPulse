@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import android.widget.ListView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -27,7 +28,7 @@ class EstacionesActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Llenar el Spinner con países (puedes cambiar esto por una lista de países real)
-        val countries = arrayOf("CO", "FR", "Italia", "Alemania")
+        val countries = arrayOf("CO", "FR", "IT", "ES", "US","CA")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, countries)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerPais.adapter = adapter
@@ -77,7 +78,15 @@ class EstacionesActivity : AppCompatActivity() {
             }
 
             if (stationsList.isNotEmpty()) {
-                val stationsAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, stationsList)
+                // Usamos un ArrayAdapter personalizado
+                val stationsAdapter = object : ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, stationsList) {
+                    override fun getView(position: Int, convertView: android.view.View?, parent: android.view.ViewGroup): android.view.View {
+                        val view = super.getView(position, convertView, parent)
+                        val textView = view.findViewById<TextView>(android.R.id.text1)
+                        textView.setTextColor(android.graphics.Color.WHITE) // Establecer el texto en blanco
+                        return view
+                    }
+                }
                 binding.lvEstaciones.adapter = stationsAdapter
 
                 // Configurar el listener para manejar el click en cada estación
