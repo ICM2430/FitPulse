@@ -1,20 +1,18 @@
 package com.example.fitpulseproyecto
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.Spinner
 import android.widget.Toast
+import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
-import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.fitpulseproyecto.databinding.ActivityEstacionesBinding
-import org.json.JSONArray
 import org.json.JSONObject
 
 class EstacionesActivity : AppCompatActivity() {
@@ -64,21 +62,37 @@ class EstacionesActivity : AppCompatActivity() {
             val networks = jsonResponse.getJSONArray("networks")
 
             val stationsList = mutableListOf<String>()
+            val stationsDetails = mutableListOf<JSONObject>() // Lista para almacenar los detalles de cada estación
+
             for (i in 0 until networks.length()) {
                 val network = networks.getJSONObject(i)
-                val countryName = network.getString("location").let {
-                    JSONObject(it).getString("country")
-                }
+                val location = network.getJSONObject("location")
+                val countryName = location.getString("country")
 
                 if (countryName == country) {
                     val stationName = network.getString("name")
                     stationsList.add(stationName)
+                    stationsDetails.add(network)  // Guardamos el objeto completo de la estación
                 }
             }
 
             if (stationsList.isNotEmpty()) {
                 val stationsAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, stationsList)
                 binding.lvEstaciones.adapter = stationsAdapter
+
+                // Configurar el listener para manejar el click en cada estación
+                binding.lvEstaciones.setOnItemClickListener { _, _, position, _ ->
+                    val selectedStation = stationsDetails[position]
+                    val intent = Intent(this, EstacionDetailActivity::class.java)
+
+                    // Pasar los detalles de la estación a la actividad de detalles
+                    intent.putExtra("estacionName", selectedStation.getString("name"))
+                    intent.putExtra("estacionLocation", selectedStation.getString("location"))
+                    intent.putExtra("estacionCountry", selectedStation.getJSONObject("location").getString("country"))
+                    intent.putExtra("estacionCompany", selectedStation.getJSONArray("company").getString(0))
+
+                    startActivity(intent) // Iniciar la actividad de detalles
+                }
             } else {
                 Toast.makeText(this, "No se encontraron estaciones en este país", Toast.LENGTH_SHORT).show()
             }

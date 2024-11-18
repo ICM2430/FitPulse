@@ -26,6 +26,9 @@
         android:theme="@style/Theme.FitPulseProyecto"
         tools:targetApi="31">
         <activity
+            android:name=".EstacionDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".EstacionesActivity"
             android:exported="false" />
 
