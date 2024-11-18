@@ -19,7 +19,6 @@
         android:text="FitPulse"
         android:textColor="@color/white"
         android:textSize="48sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,143 +29,106 @@
         android:layout_height="72dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/nameRegister"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:srcCompat="@drawable/baseline_directions_bike_24" />
 
     <EditText
-        android:id="@+id/nameRegister"
+        android:id="@+id/nombreEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/borders"
-        android:ems="10"
         android:hint="Nombre"
         android:inputType="text"
         android:padding="10dp"
-        android:textColorHint="#6D6D6D"
         android:textColor="#BDBDBD"
-        app:layout_constraintBottom_toTopOf="@+id/usernameRegister"
+        android:textColorHint="#6D6D6D"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
     <EditText
-        android:id="@+id/usernameRegister"
+        android:id="@+id/apellidoEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/borders"
-        android:ems="10"
-        android:hint="Username"
+        android:hint="Apellido"
         android:inputType="text"
         android:padding="10dp"
-        android:textColorHint="#6D6D6D"
         android:textColor="#BDBDBD"
-        app:layout_constraintBottom_toTopOf="@+id/emailRegister"
+        android:textColorHint="#6D6D6D"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameRegister" />
+        app:layout_constraintTop_toBottomOf="@+id/nombreEditText" />
 
     <EditText
-        android:id="@+id/emailRegister"
+        android:id="@+id/usuarioEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/borders"
-        android:ems="10"
+        android:hint="Usuario"
+        android:inputType="text"
+        android:padding="10dp"
+        android:textColor="#BDBDBD"
+        android:textColorHint="#6D6D6D"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/apellidoEditText" />
+
+    <EditText
+        android:id="@+id/correoEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/borders"
         android:hint="Correo"
         android:inputType="textEmailAddress"
         android:padding="10dp"
-        android:textColorHint="#6D6D6D"
         android:textColor="#BDBDBD"
-        app:layout_constraintBottom_toTopOf="@+id/passwordRegister"
+        android:textColorHint="#6D6D6D"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameRegister" />
+        app:layout_constraintTop_toBottomOf="@+id/usuarioEditText" />
 
     <EditText
-        android:id="@+id/passwordRegister"
+        android:id="@+id/contrasenaEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/borders"
-        android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPassword"
         android:padding="10dp"
-        android:textColorHint="#6D6D6D"
         android:textColor="#BDBDBD"
-        app:layout_constraintBottom_toTopOf="@+id/register"
+        android:textColorHint="#6D6D6D"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailRegister" />
+        app:layout_constraintTop_toBottomOf="@+id/correoEditText" />
 
     <Button
-        android:id="@+id/register"
+        android:id="@+id/registerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
-        android:layout_marginTop="24dp"
         android:layout_marginEnd="72dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="#24bb64"
         android:text="Registrarme"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordRegister" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:text="Al crear una cuenta, aceptas nuestros terminos y condiciones"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register" />
-
-    <Button
-        android:id="@+id/loginRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:backgroundTint="#24613e"
-        android:text="Iniciar sesión"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:text="¿Ya tienes una cuenta?"
-        app:layout_constraintBottom_toTopOf="@+id/loginRegister"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
+        app:layout_constraintTop_toBottomOf="@+id/contrasenaEditText" />
 </androidx.constraintlayout.widget.ConstraintLayout>

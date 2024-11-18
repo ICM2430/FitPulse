@@ -7,14 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".MiPerfilActivity"
     android:background="#202124">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
+        <!-- Botón Atrás -->
         <Button
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
             android:id="@+id/atras"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
@@ -22,6 +24,9 @@
             android:backgroundTint="#24613e"
             android:text="Atrás" />
 
+        <!-- Título -->
+
+        <!-- Imagen de perfil -->
         <TextView
             android:id="@+id/titulo"
             android:layout_width="match_parent"
@@ -31,7 +36,7 @@
             android:text="FitPulse"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="50dp"
+            android:textSize="50sp"
             tools:fontFamily="@font/timmana" />
 
         <ImageView
@@ -39,8 +44,10 @@
             android:layout_width="149dp"
             android:layout_height="142dp"
             android:layout_gravity="center"
-            android:src="@drawable/perfil" />
+            android:src="@drawable/perfil"
+            android:onClick="changeProfilePicture"/>
 
+        <!-- Usuario -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,7 +56,7 @@
             android:text="Usuario"
             android:fontFamily="@font/roboto_slab_semibold"
             android:textColor="@color/white"
-            android:textSize="30dp"/>
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/usuario"
@@ -63,6 +70,7 @@
             android:background="#24613e"
             android:text="-"/>
 
+        <!-- Nombre -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,7 +79,7 @@
             android:text="Nombre"
             android:fontFamily="@font/roboto_slab_semibold"
             android:textColor="@color/white"
-            android:textSize="30dp"/>
+            android:textSize="30sp"/>
 
         <TextView
             android:id="@+id/nombre"
@@ -85,6 +93,30 @@
             android:background="#24613e"
             android:text="-"/>
 
+        <!-- Apellido -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:text="Apellido"
+            android:fontFamily="@font/roboto_slab_semibold"
+            android:textColor="@color/white"
+            android:textSize="30sp"/>
+
+        <TextView
+            android:id="@+id/apellido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto_slab_semibold"
+            android:background="#24613e"
+            android:text="-"/>
+
+        <!-- Correo -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -93,7 +125,7 @@
             android:text="Correo"
             android:fontFamily="@font/roboto_slab_semibold"
             android:textColor="@color/white"
-            android:textSize="30dp"/>
+            android:textSize="30sp"/>
 
         <TextView
             android:id="@+id/correo"
@@ -107,58 +139,6 @@
             android:background="#24613e"
             android:text="-"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:text="Fecha de nacimiento"
-            android:fontFamily="@font/roboto_slab_semibold"
-            android:textColor="@color/white"
-            android:textSize="30dp"/>
-
-        <TextView
-            android:id="@+id/fecha_nacimiento"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="20dp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto_slab_semibold"
-            android:background="#24613e"
-            android:text="-"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:text="Contraseña"
-            android:fontFamily="@font/roboto_slab_semibold"
-            android:textColor="@color/white"
-            android:textSize="30dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="20dp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto_slab_semibold"
-            android:background="#24613e"
-            android:text="*****************************"/>
-
-        <Button
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="30dp"
-            android:id="@+id/editar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#24613e"
-            android:text="Editar mis datos" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
