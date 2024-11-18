@@ -59,6 +59,11 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
+
+    implementation ("com.github.bumptech.glide:glide:4.15.1")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1")
+
+
     implementation ("com.squareup.picasso:picasso:2.71828")
     implementation(libs.play.services.maps)
     implementation(libs.play.services.location)

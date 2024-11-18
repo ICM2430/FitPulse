@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,30 +9,45 @@
     tools:context=".AmigosActivity">
 
     <!-- Barra de búsqueda -->
+
+    <!-- Campo de texto para ingresar el nombre del amigo -->
+
+    <!-- Botón para agregar un amigo -->
     <EditText
-        android:id="@+id/search_bar"
+        android:id="@+id/editTextFriendName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:background="@color/black"
-        android:hint="Buscar o añadir amigos"
+        android:drawablePadding="10dp"
+        android:hint="Ingresa el nombre del amigo"
+        android:inputType="text"
         android:padding="12dp"
         android:textColor="#FFFFFF"
         android:textColorHint="#AAAAAA"
-        android:drawablePadding="10dp"
-        android:inputType="text"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="31dp" />
+
+    <Button
+        android:id="@+id/btnAddFriend"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Agregar Amigo"
+        android:textColor="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/editTextFriendName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Lista de amigos -->
+    <!-- Lista de amigos (RecyclerView) -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/friends_recycler_view"
+        android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:padding="8dp"
-        app:layout_constraintTop_toBottomOf="@id/search_bar"
+        app:layout_constraintTop_toBottomOf="@id/btnAddFriend"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
