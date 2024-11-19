@@ -60,10 +60,10 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
 
+    //REST
+    implementation ("com.android.volley:volley:1.2.1")
     implementation ("com.github.bumptech.glide:glide:4.15.1")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1")
-
-
     implementation ("com.squareup.picasso:picasso:2.71828")
     implementation(libs.play.services.maps)
     implementation(libs.play.services.location)

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@android:color/black"
+    android:gravity="center_horizontal">
+
+    <!-- Botón de regreso alineado arriba a la izquierda -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="start|center_vertical">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:contentDescription="Volver"
+            android:src="@drawable/baseline_arrow_back_24"
+            android:layout_marginBottom="16dp"
+            app:tint="#3CA74F" />
+    </LinearLayout>
+
+    <!-- Nombre de la estación centrado arriba en blanco -->
+    <TextView
+        android:id="@+id/tvStationName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre de la Estación"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:paddingBottom="16dp"
+        android:layout_gravity="center"/>
+
+    <!-- Recuadro para cada característica con fondo verde -->
+    <TextView
+        android:id="@+id/tvLatitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Latitud: "
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:padding="12dp"
+        android:background="#3CA74F"
+        android:layout_marginBottom="8dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/tvLongitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Longitud: "
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:padding="12dp"
+        android:background="#3CA74F"
+        android:layout_marginBottom="8dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/tvCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ciudad: "
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:padding="12dp"
+        android:background="#3CA74F"
+        android:layout_marginBottom="8dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/tvCountry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="País: "
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:padding="12dp"
+        android:background="#3CA74F"
+        android:layout_marginBottom="8dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/tvCompany"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Compañía: "
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:padding="12dp"
+        android:background="#3CA74F"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>
