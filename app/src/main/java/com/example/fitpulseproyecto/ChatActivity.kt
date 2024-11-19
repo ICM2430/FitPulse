@@ -1,56 +1,111 @@
 package com.example.fitpulseproyecto
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import androidx.activity.enableEdgeToEdge
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fitpulseproyecto.adapter.ChatAdapter
 import com.example.fitpulseproyecto.databinding.ActivityChatBinding
 import com.example.fitpulseproyecto.model.ChatMessage
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.*
 
 class ChatActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityChatBinding
-    private lateinit var chatAdapter: ChatAdapter
-    private val messages = mutableListOf<ChatMessage>()
+    private lateinit var chatList: MutableList<ChatMessage>
+    private lateinit var adapter: ChatAdapter
+    private lateinit var database: DatabaseReference
+    private lateinit var chatId: String
+    private lateinit var currentUser: FirebaseUser
+
+    companion object {
+        fun generateChatId(userId1: String, userId2: String): String {
+            val ids = listOf(userId1, userId2).sorted() // Ordenamos para garantizar que el chatId sea siempre el mismo
+            return "${ids[0]}_${ids[1]}" // Generamos el chatId basado en los dos IDs
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //intent ayuda a obtener nombre de amigo
-        val friendName = intent.getStringExtra("FRIEND_NAME")
-        binding.friendNameTextView.text = friendName
 
-        // Configurar el RecyclerView
-        chatAdapter = ChatAdapter(messages)
-        binding.messagesRecyclerView.adapter = chatAdapter
-        binding.messagesRecyclerView.layoutManager = LinearLayoutManager(this)
+        chatList = mutableListOf()
+        adapter = ChatAdapter(chatList)
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.adapter = adapter
 
-        // Enviar mensaje al hacer clic en el botón
-        binding.sendButton.setOnClickListener {
-            val message = binding.messageEditText.text.toString().trim()
-            if (message.isNotEmpty()) {
-                // Añadir el mensaje enviado a la lista
-                messages.add(ChatMessage(message, true)) // True: enviado por el usuario
-                chatAdapter.notifyItemInserted(messages.size - 1)
-                binding.messagesRecyclerView.scrollToPosition(messages.size - 1)
-                binding.messageEditText.text.clear()
+        // Obtener el ID del amigo desde el Intent
+        val amigoId = intent.getStringExtra("chatId") ?: ""
+        if (amigoId.isEmpty()) {
+            Toast.makeText(this, "Error: chatId no disponible", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
 
-                // Simular respuesta del amigo
-                simulateFriendResponse()
+        // Inicializar el usuario actual
+        currentUser = FirebaseAuth.getInstance().currentUser!!
+
+        // Generar el chatId único basado en los dos usuarios
+        chatId = generateChatId(currentUser.uid, amigoId)
+
+        // Inicializar la referencia a la base de datos
+        database = FirebaseDatabase.getInstance().getReference("chats/$chatId/messages")
+
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                chatList.clear()
+                for (messageSnapshot in snapshot.children) {
+                    val message = messageSnapshot.getValue(ChatMessage::class.java)
+                    message?.let { chatList.add(it) }
+                }
+                adapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@ChatActivity, "Error: ${error.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        binding.btnSend.setOnClickListener {
+            val messageText = binding.editTextMessage.text.toString().trim()
+            if (messageText.isNotEmpty()) {
+                // Obtener el usuario actual desde la base de datos de Firebase
+                val userId = currentUser.uid
+                val userRef = FirebaseDatabase.getInstance().getReference("users/$userId/usuario")
+
+                // Obtener el nombre de usuario de la base de datos
+                userRef.get().addOnSuccessListener { snapshot ->
+                    val usuario = snapshot.getValue(String::class.java) ?: "Desconocido"
+
+                    // Crear el mensaje con el nombre de usuario
+                    val message = ChatMessage(usuario, messageText, System.currentTimeMillis())
+                    sendMessage(message)
+                }.addOnFailureListener {
+                    // En caso de error al obtener el nombre de usuario, usar "Desconocido"
+                    val message = ChatMessage("Desconocido", messageText, System.currentTimeMillis())
+                    sendMessage(message)
+                }
+            } else {
+                Toast.makeText(this, "Por favor ingresa un mensaje", Toast.LENGTH_SHORT).show()
             }
         }
+
     }
 
-    private fun simulateFriendResponse() {
-        Handler(Looper.getMainLooper()).postDelayed({
-            messages.add(ChatMessage("si", false))
-            chatAdapter.notifyItemInserted(messages.size - 1)
-            binding.messagesRecyclerView.scrollToPosition(messages.size - 1)
-        }, 2000)
+    private fun sendMessage(message: ChatMessage) {
+        val messageId = database.push().key
+        if (messageId != null) {
+            database.child(messageId).setValue(message)
+                .addOnSuccessListener {
+                    binding.editTextMessage.text.clear()
+                    Toast.makeText(this, "Mensaje enviado", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Error al enviar el mensaje: ${it.message}", Toast.LENGTH_SHORT).show()
+                }
+        }
     }
 }

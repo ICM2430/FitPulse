@@ -59,11 +59,16 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
+
     //REST
     implementation ("com.android.volley:volley:1.2.1")
-
+    implementation ("com.github.bumptech.glide:glide:4.15.1")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1")
+    implementation ("com.squareup.picasso:picasso:2.71828")
     implementation(libs.play.services.maps)
     implementation(libs.play.services.location)
+    implementation(libs.firebase.storage.ktx)
+    implementation(libs.firebase.database.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
