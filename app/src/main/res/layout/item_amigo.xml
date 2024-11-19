@@ -16,7 +16,7 @@
 
         <!-- Imagen de perfil -->
         <ImageView
-            android:id="@+id/profile_image"
+            android:id="@+id/profileImage"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:scaleType="centerCrop"
@@ -24,7 +24,7 @@
 
         <!-- Nombre del amigo -->
         <TextView
-            android:id="@+id/friend_name"
+            android:id="@+id/friendName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -32,15 +32,6 @@
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
 
-        <!-- Estado del amigo -->
-        <TextView
-            android:id="@+id/friend_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Online"
-            android:textColor="#AAAAAA"
-            android:textSize="14sp" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
