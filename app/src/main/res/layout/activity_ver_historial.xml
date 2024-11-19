@@ -25,20 +25,34 @@
     <!-- Título (TextView) alineado a la derecha del ImageButton -->
     <TextView
         android:id="@+id/titulo_historial"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="246dp"
+        android:layout_height="26dp"
         android:layout_marginTop="70dp"
-        android:textColor="@color/white"
         android:fontFamily="@font/roboto_slab_semibold"
-        android:textSize="20sp"
-        android:text="Mis entrenamientos anteriores"
+        android:text="Mis entrenamientos"
         android:textAlignment="center"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/backButton"
         app:layout_constraintStart_toEndOf="@id/backButton"
-        app:layout_constraintBottom_toBottomOf="@id/backButton" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Botón para acceder a las estaciones de bicicletas -->
 
 
     <!-- ScrollView para contener los elementos de historial de entrenamientos -->
+    <Button
+        android:id="@+id/boton_estaciones"
+        android:layout_width="110dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="68dp"
+        android:backgroundTint="#3ca74f"
+        android:text="Estaciones"
+        android:textColor="@android:color/white"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
