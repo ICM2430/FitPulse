@@ -8,26 +8,24 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fitpulseproyecto.R
 import com.example.fitpulseproyecto.model.ChatMessage
 
-class ChatAdapter(private val messageList: List<ChatMessage>) :
-    RecyclerView.Adapter<ChatAdapter.MessageViewHolder>() {
+class ChatAdapter(private val chatList: List<ChatMessage>) :
+    RecyclerView.Adapter<ChatAdapter.ChatViewHolder>() {
 
-    inner class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val messageTextView: TextView = itemView.findViewById(R.id.messageTextView)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_chat_message, parent, false)
+        return ChatViewHolder(view)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_chat_message, parent, false)
-        return MessageViewHolder(view)
+    override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
+        val message = chatList[position]
+        holder.senderTextView.text = message.sender
+        holder.messageTextView.text = message.message
     }
 
-    override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
-        val chatMessage = messageList[position]
-        holder.messageTextView.text = chatMessage.message
-        // Puedes añadir lógica para diferenciar mensajes del usuario y los del amigo
-    }
+    override fun getItemCount(): Int = chatList.size
 
-    override fun getItemCount(): Int {
-        return messageList.size
+    class ChatViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val senderTextView: TextView = itemView.findViewById(R.id.textSender)
+        val messageTextView: TextView = itemView.findViewById(R.id.textMessage)
     }
 }
