@@ -13,6 +13,7 @@
     <!-- Campo de texto para ingresar el nombre del amigo -->
 
     <!-- Botón para agregar un amigo -->
+
     <EditText
         android:id="@+id/editTextFriendName"
         android:layout_width="0dp"
@@ -27,7 +28,7 @@
         android:textColorHint="#AAAAAA"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="31dp" />
+        tools:layout_editor_absoluteY="60dp" />
 
     <Button
         android:id="@+id/btnAddFriend"
@@ -35,7 +36,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="Agregar Amigo"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
+        android:backgroundTint="#24613e"
         app:layout_constraintTop_toBottomOf="@id/editTextFriendName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

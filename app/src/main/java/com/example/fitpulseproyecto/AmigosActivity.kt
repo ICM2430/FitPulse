@@ -135,6 +135,13 @@ class AmigosActivity : AppCompatActivity() {
 
 
     private fun addNewFriend(amigo: Amigo) {
+        // Verificar si el amigo ya está en la lista de amigos
+        val existingFriend = amigosList.find { it.id == amigo.id }
+        if (existingFriend != null) {
+            Toast.makeText(this, "Ya tienes a este amigo agregado", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         if (amigo.id.isNotEmpty() && amigo.nombre.isNotEmpty() && amigo.usuario.isNotEmpty()) {
             val newAmigo = Amigo(
                 id = amigo.id,
@@ -154,9 +161,6 @@ class AmigosActivity : AppCompatActivity() {
                     amigosList.add(newAmigo)
                     adapter.notifyItemInserted(amigosList.size - 1)
                     Toast.makeText(this, "Amigo agregado correctamente", Toast.LENGTH_SHORT).show()
-
-                    // Ahora que se agregó el amigo, puedes manejar el chat si es necesario.
-                    // Puedes almacenar el chatId generado de alguna manera en la base de datos de chats.
                 }
                 .addOnFailureListener {
                     Toast.makeText(this, "Error al agregar el amigo: ${it.message}", Toast.LENGTH_SHORT).show()
@@ -166,6 +170,7 @@ class AmigosActivity : AppCompatActivity() {
             Toast.makeText(this, "Error al generar la clave para el amigo", Toast.LENGTH_SHORT).show()
         }
     }
+
 
 
 }
