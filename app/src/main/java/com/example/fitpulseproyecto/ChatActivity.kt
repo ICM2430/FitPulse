@@ -29,7 +29,10 @@ class ChatActivity : AppCompatActivity() {
 
     companion object {
         fun generateChatId(userId1: String, userId2: String): String {
-            val ids = listOf(userId1, userId2).sorted() // Ordenamos para garantizar que el chatId sea siempre el mismo
+            val ids = listOf(
+                userId1,
+                userId2
+            ).sorted() // Ordenamos para garantizar que el chatId sea siempre el mismo
             return "${ids[0]}_${ids[1]}" // Generamos el chatId basado en los dos IDs
         }
     }
@@ -72,7 +75,8 @@ class ChatActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@ChatActivity, "Error: ${error.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ChatActivity, "Error: ${error.message}", Toast.LENGTH_SHORT)
+                    .show()
             }
         })
 
@@ -92,7 +96,8 @@ class ChatActivity : AppCompatActivity() {
                     sendMessage(message)
                 }.addOnFailureListener {
                     // En caso de error al obtener el nombre de usuario, usar "Desconocido"
-                    val message = ChatMessage("Desconocido", messageText, System.currentTimeMillis())
+                    val message =
+                        ChatMessage("Desconocido", messageText, System.currentTimeMillis())
                     sendMessage(message)
                 }
             } else {
@@ -110,26 +115,35 @@ class ChatActivity : AppCompatActivity() {
                     binding.editTextMessage.text.clear()
                     Toast.makeText(this, "Mensaje enviado", Toast.LENGTH_SHORT).show()
 
-                    // Obtener el token del receptor
+                    // Obtener el token del receptor desde el campo "token"
                     val receiverId = intent.getStringExtra("chatId") // ID del receptor
                     if (receiverId != null) {
-                        val userRef = FirebaseDatabase.getInstance().getReference("users/$receiverId/fcmToken")
+                        val userRef =
+                            FirebaseDatabase.getInstance().getReference("users/$receiverId/token")
                         userRef.get().addOnSuccessListener { snapshot ->
                             val fcmToken = snapshot.getValue(String::class.java)
                             if (!fcmToken.isNullOrEmpty()) {
                                 // Envía la notificación al receptor
-                                sendNotificationToUser(fcmToken, chatList.last().message)
+                                sendNotificationToUser(fcmToken, message.message)
                             }
                         }.addOnFailureListener {
-                            Log.e("ChatActivity", "Error al obtener el token del receptor: ${it.message}")
+                            Log.e(
+                                "ChatActivity",
+                                "Error al obtener el token del receptor: ${it.message}"
+                            )
                         }
                     }
                 }
                 .addOnFailureListener {
-                    Toast.makeText(this, "Error al enviar el mensaje: ${it.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        "Error al enviar el mensaje: ${it.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
         }
     }
+
     private fun sendNotificationToUser(token: String, message: String) {
         val url = "https://fcm.googleapis.com/fcm/send"
         val requestBody = mapOf(
