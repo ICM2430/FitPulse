@@ -2,8 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#202124"
     android:orientation="vertical"
     android:padding="16dp">
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -22,8 +25,11 @@
             android:id="@+id/editTextMessage"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:layout_weight="1"
             android:hint="Escribe un mensaje"
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/white"
             android:inputType="text" />
 
         <Button

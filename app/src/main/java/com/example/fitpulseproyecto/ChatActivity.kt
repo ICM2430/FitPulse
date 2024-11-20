@@ -10,6 +10,7 @@ import com.example.fitpulseproyecto.model.ChatMessage
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
+import com.google.firebase.database.DatabaseReference
 
 class ChatActivity : AppCompatActivity() {
 
