@@ -1,9 +1,11 @@
 package com.example.fitpulseproyecto
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.volley.toolbox.StringRequest
 import com.example.fitpulseproyecto.adapter.ChatAdapter
 import com.example.fitpulseproyecto.databinding.ActivityChatBinding
 import com.example.fitpulseproyecto.model.ChatMessage
@@ -11,6 +13,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.vertexai.type.content
+import com.google.gson.Gson
+import com.android.volley.Request
+import com.android.volley.toolbox.Volley
 
 class ChatActivity : AppCompatActivity() {
 
@@ -103,10 +109,59 @@ class ChatActivity : AppCompatActivity() {
                 .addOnSuccessListener {
                     binding.editTextMessage.text.clear()
                     Toast.makeText(this, "Mensaje enviado", Toast.LENGTH_SHORT).show()
+
+                    // Obtener el token del receptor
+                    val receiverId = intent.getStringExtra("chatId") // ID del receptor
+                    if (receiverId != null) {
+                        val userRef = FirebaseDatabase.getInstance().getReference("users/$receiverId/fcmToken")
+                        userRef.get().addOnSuccessListener { snapshot ->
+                            val fcmToken = snapshot.getValue(String::class.java)
+                            if (!fcmToken.isNullOrEmpty()) {
+                                // Envía la notificación al receptor
+                                sendNotificationToUser(fcmToken, chatList.last().message)
+                            }
+                        }.addOnFailureListener {
+                            Log.e("ChatActivity", "Error al obtener el token del receptor: ${it.message}")
+                        }
+                    }
                 }
                 .addOnFailureListener {
                     Toast.makeText(this, "Error al enviar el mensaje: ${it.message}", Toast.LENGTH_SHORT).show()
                 }
         }
     }
+    private fun sendNotificationToUser(token: String, message: String) {
+        val url = "https://fcm.googleapis.com/fcm/send"
+        val requestBody = mapOf(
+            "to" to token,
+            "data" to mapOf(
+                "title" to "Nuevo mensaje",
+                "body" to message
+            )
+        )
+
+        val jsonBody = Gson().toJson(requestBody)
+
+        val request = object : StringRequest(
+            Request.Method.POST,
+            url,
+            { response -> Log.d("ChatActivity", "Notificación enviada: $response") },
+            { error -> Log.e("ChatActivity", "Error al enviar notificación: ${error.message}") }
+        ) {
+            override fun getHeaders(): Map<String, String> {
+                return mapOf(
+                    "Authorization" to "key=YOUR_SERVER_KEY",
+                    "Content-Type" to "application/json"
+                )
+            }
+
+            override fun getBody(): ByteArray {
+                return jsonBody.toByteArray(Charsets.UTF_8)
+            }
+        }
+
+        Volley.newRequestQueue(this).add(request)
+    }
 }
+
+

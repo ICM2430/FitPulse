@@ -20,11 +20,13 @@ class MessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         Log.d("MessagingService", "Mensaje recibido: ${remoteMessage.data}")
         Log.d("MessagingService", "Notificación: ${remoteMessage.notification?.body}")
-        super.onMessageReceived(remoteMessage)
-            val title = "Notificación"
-            val body = "Tienes un mensaje nuevo."
 
-            sendNotification(title, body)
+        val data = remoteMessage.data
+        val title = data["title"] ?: "Notificación"
+        val body = data["body"] ?: "Tienes un mensaje nuevo."
+
+        sendNotification(title, body)
+        super.onMessageReceived(remoteMessage)
     }
 
     private fun sendNotification(title: String, messageBody: String) {
@@ -38,7 +40,7 @@ class MessagingService : FirebaseMessagingService() {
         }
 
         val pendingIntent = PendingIntent.getActivity(
-            this, 0, intent, PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE
+            this, 0, intent,  PendingIntent.FLAG_IMMUTABLE
         )
 
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
@@ -46,15 +48,20 @@ class MessagingService : FirebaseMessagingService() {
             .setContentTitle(title)
             .setContentText(messageBody)
             .setAutoCancel(true)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(pendingIntent)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                channelId,
-                "Notificaciones generales",
-                NotificationManager.IMPORTANCE_HIGH
-            )
-            notificationManager.createNotificationChannel(channel)
+            val existingChanel=notificationManager.getNotificationChannel(channelId)
+            if (existingChanel==null){
+                val channel = NotificationChannel(
+                    channelId,
+                    "Notificaciones generales",
+                    NotificationManager.IMPORTANCE_HIGH
+                )
+                notificationManager.createNotificationChannel(channel)
+            }
+
         }
 
         val notificationId = System.currentTimeMillis().toInt()
