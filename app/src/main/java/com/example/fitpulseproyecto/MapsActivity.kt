@@ -90,6 +90,7 @@
         private lateinit var locationRequest: LocationRequest
         private lateinit var locationCallback: LocationCallback
         private var myMarker: Marker? = null
+        private var friendMarker: Marker? = null
 
 
         private lateinit var geocoder: Geocoder
@@ -117,6 +118,7 @@
         private lateinit var friendvel: ValueEventListener
         private lateinit var loggedUserVel: ValueEventListener
         val USERS = "users/"
+        var amigosID : ArrayList<String>? = null
 
         val getLocationPermission = registerForActivityResult(
             ActivityResultContracts.RequestPermission(),
@@ -157,16 +159,7 @@
 
             geocoder = Geocoder(baseContext)
             val destinoAddress = intent.getStringExtra("destino")
-            val amigosID = intent.getStringArrayListExtra("amigosID")
-            if (!amigosID.isNullOrEmpty()) {
-                // Usar la lista
-                for (id in amigosID) {
-                    Log.i("listaAmigos", "ID: $id")
-                    subscribeToUserChanges(id)
-                }
-            }else{
-                Log.i("listaAmigos", "No se seleccionó ningun amigo")
-            }
+            amigosID = intent.getStringArrayListExtra("amigosID")
             destino = destinoAddress?.let { findLocation(it) }
 
             val mapFragment = supportFragmentManager
@@ -206,6 +199,17 @@
 
         override fun onMapReady(googleMap: GoogleMap) {
             mMap = googleMap
+            mMap.uiSettings.setAllGesturesEnabled(true)
+            mMap.uiSettings.isZoomControlsEnabled = true
+            if (!amigosID.isNullOrEmpty()) {
+                // Usar la lista
+                for (id in amigosID!!) {
+                    Log.i("listaAmigos", "ID: $id")
+                    subscribeToUserChanges(id)
+                }
+            }else{
+                Log.i("listaAmigos", "No se seleccionó ningun amigo")
+            }
         }
 
         private fun createLocationRequest(): LocationRequest {
@@ -386,13 +390,13 @@
         }
 
         fun drawMarker(location: LatLng, description: String?) {
-            val addressMarker = mMap.addMarker(
-                MarkerOptions().position(location).icon(bitmapDescriptorFromVector(this, R.drawable.ic_bike))
-            )!!
-            if (description != null) {
-                addressMarker.title = description
-            }
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 18f))
+            Log.i("friend-location", location.latitude.toString())
+            //friendMarker?.remove()
+            friendMarker = mMap.addMarker(MarkerOptions()
+                .position(location)
+                .title("Marker in my friend location")
+                .icon(bitmapDescriptorFromVector(baseContext, R.drawable.baseline_pedal_bike_24))
+            )
         }
 
 
@@ -457,9 +461,13 @@
             friendRef = database.getReference(USERS+userId)
             friendvel = friendRef!!.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    for(child in snapshot.children){
-                        Log.i("friend-location", child.child("usuario/location/latitude").getValue(Double::class.java).toString())
+                    val latitude = snapshot.child("location/latitude").getValue(Double::class.java)
+                    val longitude = snapshot.child("location/longitude").getValue(Double::class.java)
+                    if(latitude != null && longitude != null){
+                        val locationLatLng = LatLng(latitude, longitude)
+                        drawMarker(locationLatLng, "friend")
                     }
+
                 }
                 override fun onCancelled(error: DatabaseError) {
                     //Log error
