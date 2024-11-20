@@ -1,15 +1,23 @@
 package com.example.fitpulseproyecto
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.fitpulseproyecto.adapter.PostAdapter
 import com.example.fitpulseproyecto.databinding.ActivityHomeBinding
 import com.example.fitpulseproyecto.model.Post
+import com.google.firebase.messaging.FirebaseMessaging
 import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
+import android.Manifest
+import android.content.pm.PackageManager
+import androidx.core.content.ContextCompat
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import java.util.Date
 import java.util.Locale
 
@@ -24,6 +32,23 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val token = task.result
+                println("Token: $token")
+                saveTokenToDatabase(token)
+            } else {
+                println("Error al obtener el token: ${task.exception}")
+            }
+        }
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.POST_NOTIFICATIONS), 1)
+            }
+        }
 
 
         //val currentDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
@@ -78,3 +103,12 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 }
+
+private fun saveTokenToDatabase(token: String) {
+    val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+    val databaseRef = FirebaseDatabase.getInstance().getReference("users/$userId/token")
+    databaseRef.setValue(token)
+        .addOnSuccessListener { println("Token guardado exitosamente.") }
+        .addOnFailureListener { println("Error al guardar el token: ${it.message}") }
+}
+

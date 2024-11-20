@@ -59,8 +59,24 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
+    //ROUTES
+    implementation("com.google.android.gms:play-services-location:21.3.0")
+    implementation("org.osmdroid:osmdroid-android:6.1.18")
+    implementation ("com.github.MKergall:osmbonuspack:6.8.0")
+
+
+    //REST
+    implementation ("com.android.volley:volley:1.2.1")
+
+    implementation ("com.github.bumptech.glide:glide:4.15.1")
+    implementation(libs.firebase.messaging.ktx)
+    implementation(libs.firebase.vertexai)
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1")
+    implementation ("com.squareup.picasso:picasso:2.71828")
     implementation(libs.play.services.maps)
     implementation(libs.play.services.location)
+    implementation(libs.firebase.storage.ktx)
+    implementation(libs.firebase.database.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

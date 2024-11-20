@@ -78,20 +78,11 @@
             android:textSize="20dp"
             android:text="¿Con qué amigos haces hoy el entreo?"/>
 
-        <EditText
-            android:layout_marginTop="20dp"
-            android:id="@+id/correo"
+
+        <ListView
+            android:id="@+id/listFriends"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Ingresa un amigo"
-            android:textColor="#BDBDBD"
-            android:textColorHint="@color/cardview_dark_background"
-            android:inputType="textEmailAddress"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/borders"
-            android:padding="10dp"
-            android:fontFamily="@font/roboto_slab_semibold"
-            android:layout_marginRight="20dp"/>
+            android:layout_height="wrap_content" />
 
         <Button
             android:layout_marginLeft="20dp"
